@@ -57,7 +57,7 @@ route.post("/createEntry", async (req, res) => {
     });
 
     // Send a response of "ok"
-    res.status(201).end()
+    res.status(201).end();
 });
 
 // Edit an entry with the id given as a parameter
@@ -66,6 +66,7 @@ route.get("/editEntry/:id", async (req, res) => {
     const entry = await Entry.findById(req.params.id);
     console.log(entry);
     res.send(entry);
+    //res.render();
 });
 
 // Delegate all authentication to the auth.js router
