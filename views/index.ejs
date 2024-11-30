@@ -1,21 +1,22 @@
 <!-- include header -->
-<% include("include/_header") %>
+<%- include("include/_header") %>
 
 <!-- Main Site -->
 <main>
     <div class="indexTopBar">
-        <img src="img/SE-GitHub-image.png" alt="NCHS Logo" />
+        <img src="img/SE-GitHub-image.png" alt="NCHS Logo" width="80" height="100"/>
         <h1>Habits of Mind Journal</h1>
         <a href="/createEntry" role="button">Create Entry</a>
     </div>
-
+    <div class="desc">Add, edit, and delete entries from a Habits of Mind journal using this website. There are currently <%=entries.length%>.</div>
+    <hr /><hr /><hr /><hr />
     <div class="entries" id="entries">
         <% for(let entry of entries) { %>
             <div class="entry">
                 <div class="entryDate"><%=entry.date%></div>
                 <div class="entryHabit"><%=entry.habit%></div>
                 <div class="entryContent"><%=entry.content%></div>
-                <div><a href="/editEntry/<%=entry.id%>" role="button" class="secondary">Edit</a></div>
+                <div><a href="/editEntry/<%=entry.id%>" role="button" class="secondary">Edit Content</a></div>
             </div>
         <% } %>
     </div>
@@ -24,4 +25,4 @@
 <!-- End of Main Site -->
 
 <!-- include footer -->
-<% include("include/_footer") %>
+<%- include("include/_footer") %>

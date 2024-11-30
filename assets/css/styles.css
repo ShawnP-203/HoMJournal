@@ -13,3 +13,115 @@
   width: 100px;
   height: 100px;
 }
+
+hr {
+  border-top: 10px double aliceblue;
+  margin: 4px;
+}
+
+.indexTopBar {
+  display: flex;
+  flex-flow: row wrap;
+}
+
+.indexTopBar * {
+  margin: 5px;
+}
+
+.indexTopBar a {
+  max-height: 2em;
+}
+
+.desc {
+  margin: 20px 20px -52px;
+  max-width: fit-content;
+  border: 3px ridge brown;
+  padding: 4px;
+  background-color: rgb(138, 42, 42);
+  position: relative;
+  z-index: 99999;
+  color: yellow;
+}
+
+.entries, fieldset {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.entry {
+  border: 5px solid blue;
+  margin: 8px;
+  min-width: calc(100%/6);
+  background-color: rgb(42, 0, 69);
+}
+
+.entry * {
+  margin: 5px;
+}
+
+.entryDate {
+  font-size: 18px;
+  font-weight: bold;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+.entryHabit::before, .entryContent::before {
+  font-size: 18px;
+  font-weight: bold;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  font-variant: small-caps;
+  color: lightblue;
+}
+
+.entryHabit::before {
+  content: "Habit ";
+}
+
+.entryContent::before {
+  content: "Content ";
+}
+
+.form {
+  display: flex;
+  margin: 20px;
+}
+
+fieldset label {
+  margin: 50px 5px;
+}
+
+label {
+  margin: 0 20px;
+}
+
+input.submit {
+  margin-left: 40px;
+  max-width: 250px;
+  animation: 0.1s unhover forwards;
+}
+
+input.submit:hover {
+  animation: 0.1s hover forwards;
+}
+
+@keyframes hover {
+  from {
+    background-color: rgb(69, 0, 42);
+    border-color: darkred;
+  }
+  to {
+    background-color: darkred;
+    border-color: red;
+  }
+}
+
+@keyframes unhover {
+  from {
+    background-color: darkred;
+    border-color: red;
+  }
+  to {
+    background-color: rgb(69, 0, 42);
+    border-color: darkred;
+  }
+}
