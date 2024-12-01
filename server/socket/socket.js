@@ -31,5 +31,13 @@ function emitNewEntry(entry) {
     io.emit("new entry", entry);
 }
 
+function emitEdit(entry) {
+    io.emit("edit", entry);
+}
+
+function emitDeletion(entry) {
+    io.emit("deletion", entry);
+}
+
 // Export any functions so they can be used outside this file
-module.exports = {createSocketServer, emitNewEntry};
+module.exports = {createSocketServer, emitNewEntry, emitEdit, emitDeletion};

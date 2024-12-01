@@ -2,7 +2,7 @@ const express = require("express");
 const route = express.Router();
 const Entry = require("../model/entry");
 // Just importing emitNewEntry from socket
-const {emitNewEntry} = require("../socket/socket");
+const {emitNewEntry, emitEdit, emitDeletion} = require("../socket/socket");
 
 // JSON is an easy way to store static data
 const habitsOfMind = require("../model/habitsOfMind.json");
@@ -64,6 +64,49 @@ route.post("/createEntry", async (req, res) => {
 // Currently this just logs the entry to be edited
 route.get("/editEntry/:id", async (req, res) => {
     res.render("editEntry", {entry: await Entry.findById(req.params.id)});
+});
+
+route.post("/editEntry/:id", async (req, res) => {
+    const entry = await Entry.findById(req.params.id);
+    if(req.body.delete)
+    {
+        emitDeletion({
+            id: entry._id,
+            date: entry.date.toLocaleDateString(),
+            habit: entry.habit,
+            content: entry.content.slice(0, 20) + "...",
+        });
+        
+        await Entry.deleteOne({
+            date: entry.date,
+            email: entry.email,
+            habit: entry.habit,
+            content: entry.content,
+        });
+    }
+    else
+    {
+        await Entry.updateOne({
+            date: entry.date,
+            email: entry.email,
+            habit: entry.habit,
+            content: entry.content,
+        },
+        {
+            date: entry.date,
+            email: entry.email,
+            habit: entry.habit,
+            content: req.body.content,
+        });
+
+        emitEdit({
+            id: entry._id,
+            date: entry.date.toLocaleDateString(),
+            habit: entry.habit,
+            content: entry.content.slice(0, 20) + "...",
+        });
+    }
+    res.status(201).end();
 });
 
 // Delegate all authentication to the auth.js router

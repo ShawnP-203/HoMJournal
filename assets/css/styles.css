@@ -43,7 +43,7 @@ hr {
   color: yellow;
 }
 
-.entries, .buttons, fieldset {
+.entries, .buttons, .form, fieldset {
   display: flex;
   flex-wrap: wrap;
 }
