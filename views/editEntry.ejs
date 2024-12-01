@@ -3,12 +3,19 @@
 
 <!-- Main Site -->
 <main>
-    <img src="img/SE-GitHub-image.png" alt="NCHS Logo" />
-    <h1>Editing Entry</h1>
-    <p>You are rewriting this entry's content. The date and habit of mind cannot be changed.</p>
+    <div class="indexTopBar">
+        <img src="/img/SE-GitHub-image.png" alt="NCHS Logo" width="80" height="100"/>
+        <h1>Editing Entry</h1>
+        <a href="/" role="button">Go Back</a>
+    </div>
+    <div class="desc">You are re-writing this entry's description. An option to delete the entry is also available.</div>
+    <hr /><hr /><hr /><hr />
     <div>
-        <label>Journal Entry <textarea class="content"><%=entry.content%></textarea></label>
-        <input type="submit" class="submit" value="Submit" />
+        <label>Entry Description <textarea id="content"><%=entry.content%></textarea></label>
+        <div class="buttons">
+            <input type="submit" class="submit" value="Change Entry" />
+            <input type="submit" class="delete" value="Delete Entry" />
+        </div>
     </div>
 </main>
 

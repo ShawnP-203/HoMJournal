@@ -33,7 +33,7 @@ route.get("/", async (req, res) => {
 
 route.get("/createEntry", (req, res) => {
     // Send the HoM object to the createEntry view
-    res.render("createEntry", {habits: habitsOfMind})
+    res.render("createEntry", {habits: habitsOfMind});
 });
 
 // Handle the POST request for creating new entries
@@ -63,10 +63,7 @@ route.post("/createEntry", async (req, res) => {
 // Edit an entry with the id given as a parameter
 // Currently this just logs the entry to be edited
 route.get("/editEntry/:id", async (req, res) => {
-    const entry = await Entry.findById(req.params.id);
-    console.log(entry);
-    res.send(entry);
-    //res.render();
+    res.render("editEntry", {entry: await Entry.findById(req.params.id)});
 });
 
 // Delegate all authentication to the auth.js router

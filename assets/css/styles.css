@@ -43,7 +43,7 @@ hr {
   color: yellow;
 }
 
-.entries, fieldset {
+.entries, .buttons, fieldset {
   display: flex;
   flex-wrap: wrap;
 }
@@ -97,14 +97,32 @@ label {
 input.submit {
   margin-left: 40px;
   max-width: 250px;
-  animation: 0.1s unhover forwards;
+  animation: 0.1s unhoversubmit forwards;
 }
 
 input.submit:hover {
-  animation: 0.1s hover forwards;
+  animation: 0.1s hoversubmit forwards;
 }
 
-@keyframes hover {
+input.delete {
+  margin-left: 40px;
+  max-width: 250px;
+  font-weight: 900;
+  animation: 0.1s unhoverdelete forwards;
+}
+
+input.delete:hover {
+  animation: 0.1s hoverdelete forwards;
+}
+
+.buttons::after {
+  content: url(/img/exclamation.svg);
+  right: 15px;
+  bottom: 10px;
+  position: relative;
+}
+
+@keyframes hoversubmit {
   from {
     background-color: rgb(69, 0, 42);
     border-color: darkred;
@@ -115,7 +133,7 @@ input.submit:hover {
   }
 }
 
-@keyframes unhover {
+@keyframes unhoversubmit {
   from {
     background-color: darkred;
     border-color: red;
@@ -123,5 +141,31 @@ input.submit:hover {
   to {
     background-color: rgb(69, 0, 42);
     border-color: darkred;
+  }
+}
+
+@keyframes hoverdelete {
+  from {
+    background-color: inherit;
+    border-color: rgb(69, 0, 42);
+    color: lightcoral;
+  }
+  to {
+    background-color: darkred;
+    border-color: white;
+    color: white;
+  }
+}
+
+@keyframes unhoverdelete {
+  from {
+    background-color: darkred;
+    border-color: white;
+    color: white;
+  }
+  to {
+    background-color: #111;
+    border-color: rgb(69, 0, 42);
+    color: lightcoral;
   }
 }
