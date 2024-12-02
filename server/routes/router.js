@@ -11,9 +11,6 @@ const habitsOfMind = require("../model/habitsOfMind.json");
 // When the client makes at HTTP GET request to this path
 // the callback function is executed
 route.get("/", async (req, res) => {
-    // You can use console.log to test if functions are being called
-    console.log("Path Requested: "+req.path);
-
     // The await keyword pauses the function until the line is done
     const entries = await Entry.find();
     
@@ -25,10 +22,57 @@ route.get("/", async (req, res) => {
             habit: entry.habit,
             content: entry.content.slice(0, 20) + "...",
         };
+    }).sort((a, b) => {
+        let date1 = a.date.split("/");
+        let date2 = b.date.split("/");
+        for(let i = 2; i < 5; i++)
+        {
+            if(date1[i%3] < date2[i%3])
+                return 1; //The sort is in reverse to show dates in descending order
+            else if(date1[i%3] > date2[i%3])
+                return -1;
+        }
+        return 0;
     });
 
     // The res parameter references the HTTP response object
-    res.render("index", {entries: formattedEntries});
+    res.render("index", {
+        entries: formattedEntries,
+        habits: habitsOfMind,
+    });
+});
+
+route.post("/", async (req, res) => {
+    // The await keyword pauses the function until the line is done
+    const entries = await Entry.find();
+
+    // Convert MongoDB objects to objects formatted for EJS
+    const formattedEntries = entries.map((entry) => {
+        console.log(req.body);
+        if(req.body.replaceAll("+", " ") === entry.habit) return {
+            id: entry._id,
+            date: entry.date.toLocaleDateString(),
+            habit: entry.habit,
+            content: entry.content.slice(0, 20) + "...",
+        };
+    }).sort((a, b) => {
+        let date1 = a.date.split("/");
+        let date2 = b.date.split("/");
+        for(let i = 2; i < 5; i++)
+        {
+            if(date1[i%3] < date2[i%3])
+                return 1; //The sort is in reverse to show dates in descending order
+            else if(date1[i%3] > date2[i%3])
+                return -1;
+        }
+        return 0;
+    });
+
+    // The res parameter references the HTTP response object
+    res.render("index", {
+        entries: formattedEntries,
+        habits: habitsOfMind,
+    });
 });
 
 route.get("/createEntry", (req, res) => {
