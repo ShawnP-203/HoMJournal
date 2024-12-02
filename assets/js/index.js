@@ -1,16 +1,15 @@
-const filter = document.querySelector("select.filter");
+const filter = document.getElementById("filter");
 const filterButton = document.querySelector("button.filterButton");
 
 filterButton.addEventListener("click", async() => {
-    console.log("filter=" + filter.value.replaceAll(" ", "+"));
-    const response = await fetch("/", {
-        method: "POST",
+    let q = "/?filter=" + filter.value.replaceAll(" ", "+");
+    const response = await fetch(q, {
+        method: "GET",
         headers: {"Content-Type": "application/x-www-form-urlencoded"},
-        body: "filter=" + filter.value.replaceAll(" ", "+"),
     });
 
     if(response.ok)
-        window.location = "/" + response.body;
+        window.location = q;
     else
         console.log("Error Filtering Entries");
 });

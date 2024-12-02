@@ -25,39 +25,11 @@ route.get("/", async (req, res) => {
     }).sort((a, b) => {
         let date1 = a.date.split("/");
         let date2 = b.date.split("/");
-        for(let i = 2; i < 5; i++)
+        for(let i = 0; i < 2; i++)
         {
-            if(date1[i%3] < date2[i%3])
-                return 1; //The sort is in reverse to show dates in descending order
-            else if(date1[i%3] > date2[i%3])
-                return -1;
+            date1[i] = parseInt(date1[i]);
+            date2[i] = parseInt(date2[i]);
         }
-        return 0;
-    });
-
-    // The res parameter references the HTTP response object
-    res.render("index", {
-        entries: formattedEntries,
-        habits: habitsOfMind,
-    });
-});
-
-route.post("/", async (req, res) => {
-    // The await keyword pauses the function until the line is done
-    const entries = await Entry.find();
-
-    // Convert MongoDB objects to objects formatted for EJS
-    const formattedEntries = entries.map((entry) => {
-        console.log(req.body);
-        if(req.body.replaceAll("+", " ") === entry.habit) return {
-            id: entry._id,
-            date: entry.date.toLocaleDateString(),
-            habit: entry.habit,
-            content: entry.content.slice(0, 20) + "...",
-        };
-    }).sort((a, b) => {
-        let date1 = a.date.split("/");
-        let date2 = b.date.split("/");
         for(let i = 2; i < 5; i++)
         {
             if(date1[i%3] < date2[i%3])

@@ -11,7 +11,7 @@
     <div class="desc">Add, edit, and delete entries from a Habits of Mind journal using this website. The journal has <%=entries.length%> now.</div>
     <hr /><hr /><hr /><hr />
     <label class="filterLabel">Filter by habit
-        <select class="filter">
+        <select id="filter">
             <% for(let habit of habits) { %>
             <option><%=habit%></option>
             <% } %>
