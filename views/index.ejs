@@ -8,7 +8,13 @@
         <h1>Habits of Mind Journal</h1>
         <a href="/createEntry" role="button">Create Entry</a>
     </div>
-    <div class="desc">Add, edit, and delete entries from a Habits of Mind journal using this website. The journal has <%=entries.length%> now.</div>
+    <div class="desc">
+        <% if(filter === undefined) { %>
+            Add, edit, and delete entries from a Habits of Mind journal using this website. The journal has <%=entries.length%> now.
+        <% } else { %>
+            The website has <%=entries.length%> matching the habit <%=filter%>.
+        <% } %>
+    </div>
     <hr /><hr /><hr /><hr />
     <label class="filterLabel">Filter by habit
         <select id="filter">
@@ -16,7 +22,12 @@
             <option><%=habit%></option>
             <% } %>
         </select>
-        <button class="filterButton">Filter Entries</button>
+        <div class="filterButtons">
+            <button class="filterButton">Filter Entries</button>
+            <% if(filter !== undefined) {%>
+                <a href="/" role="button">Undo Filter</a>
+            <% } %>
+        </div>
     </label>
     <div class="entries" id="entries">
         <% for(let entry of entries) { %>

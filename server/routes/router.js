@@ -13,7 +13,7 @@ const habitsOfMind = require("../model/habitsOfMind.json");
 route.get("/", async (req, res) => {
     // The await keyword pauses the function until the line is done
     const entries = await Entry.find();
-    
+
     // Convert MongoDB objects to objects formatted for EJS
     const formattedEntries = entries.map((entry) => {
         return {
@@ -25,7 +25,7 @@ route.get("/", async (req, res) => {
     }).sort((a, b) => {
         let date1 = a.date.split("/");
         let date2 = b.date.split("/");
-        for(let i = 0; i < 2; i++)
+        for(let i = 0; i < 3; i++)
         {
             date1[i] = parseInt(date1[i]);
             date2[i] = parseInt(date2[i]);
@@ -40,10 +40,20 @@ route.get("/", async (req, res) => {
         return 0;
     });
 
+    if(req.query.filter !== undefined)
+    {
+        for(let i = 0; i < formattedEntries.length; i++)
+        {
+            if(formattedEntries[i].habit !== req.query.filter)
+                formattedEntries.splice(i--, 1);
+        }
+    }
+
     // The res parameter references the HTTP response object
     res.render("index", {
         entries: formattedEntries,
         habits: habitsOfMind,
+        filter: req.query.filter,
     });
 });
 

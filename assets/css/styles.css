@@ -15,7 +15,7 @@
 }
 
 hr {
-  border-top: 10px double aliceblue;
+  border-top: 10px double gray;
   margin: 4px;
 }
 
@@ -47,11 +47,12 @@ hr {
   max-width: 600px;
 }
 
-.filterButton {
+.filterButton, .filterButton + a {
   max-width: 200px;
+  margin: 10px;
 }
 
-.entries, .buttons, .form, fieldset {
+.filterButtons, .entries, .buttons, .form, fieldset {
   display: flex;
   flex-wrap: wrap;
 }
